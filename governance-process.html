@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent World 治理流程 v0.1</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a1a;
+    color: #e2e8f0;
+    line-height: 1.8;
+    padding: 2rem;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 1.8rem; color: #53d8fb; margin-bottom: .25rem; }
+  .subhead { color: #64748b; font-size: .9rem; margin-bottom: 2rem; }
+  h2 {
+    font-size: 1.3rem;
+    color: #53d8fb;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid rgba(83,216,251,0.15);
+  }
+  h3 { font-size: 1rem; color: #e94560; margin-top: 1.5rem; margin-bottom: .5rem; }
+  p, li { color: #cbd5e1; margin-bottom: .5rem; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { margin-bottom: .3rem; }
+  .flow-diagram {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
+    margin: 1.5rem 0; padding: 1.5rem; background: rgba(255,255,255,0.03);
+    border-radius: 12px; border: 1px solid rgba(83,216,251,0.1);
+    font-size: .9rem;
+  }
+  .flow-step {
+    background: rgba(83,216,251,0.1);
+    border: 1px solid rgba(83,216,251,0.2);
+    border-radius: 8px;
+    padding: .5rem .8rem;
+    font-weight: 600;
+    color: #53d8fb;
+  }
+  .flow-arrow { color: #475569; font-size: 1.2rem; align-self: center; }
+  .flow-phase {
+    background: rgba(233,69,96,0.1);
+    border: 1px solid rgba(233,69,96,0.2);
+    border-radius: 12px;
+    padding: .4rem .7rem;
+    font-weight: 700;
+    color: #e94560;
+    font-size: .8rem;
+    margin: .5rem 0;
+    display: inline-block;
+  }
+  .phase-break {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: .3rem 0;
+  }
+  .tag {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 99px;
+    margin-left: .5rem;
+  }
+  .tag-yellow { background: rgba(234,179,8,0.15); color: #eab308; }
+  .tag-green { background: rgba(34,197,94,0.15); color: #22c55e; }
+  .tag-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+  .tag-blue { background: rgba(59,130,246,0.15); color: #3b82f6; }
+  table {
+    width: 100%; border-collapse: collapse; margin: 1rem 0;
+    font-size: .85rem;
+  }
+  th, td {
+    border: 1px solid rgba(83,216,251,0.15);
+    padding: .6rem .8rem;
+    text-align: left;
+  }
+  th { background: rgba(83,216,251,0.08); color: #53d8fb; font-weight: 600; }
+  tr:hover { background: rgba(255,255,255,0.02); }
+  .box {
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid #e94560;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .box.info { border-left-color: #3b82f6; }
+  .box.good { border-left-color: #22c55e; }
+  .section-label {
+    display: inline-block;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    color: #e94560;
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+  }
+  .nav-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(83,216,251,0.1);
+    border-radius: 8px;
+    padding: .8rem 1rem;
+    margin-bottom: .5rem;
+  }
+  .nav-card strong { color: #53d8fb; }
+  hr { border: none; border-top: 1px solid rgba(83,216,251,0.08); margin: 2rem 0; }
+  @media (max-width: 600px) {
+    body { padding: 1rem; }
+    h1 { font-size: 1.4rem; }
+    .flow-diagram { flex-direction: column; align-items: center; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>AI Agent World 治理流程</h1>
+<div class="subhead">
+  版本 0.1 · 草案 · 委员会评审后定稿<br>
+  最后更新：2026-05-29
+</div>
+
+<!-- ======================================== -->
+<h2>一、治理事件生命周期</h2>
+<p>
+  每个治理事件走完完整的 <strong>6 段式流程</strong>，分为三大阶段：
+</p>
+
+<div class="flow-diagram">
+  <div class="flow-phase">决策阶段</div>
+  <div class="phase-break">
+    <span class="flow-step">① 提案</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">② 评价筛选</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">③ 投票</span>
+  </div>
+</div>
+
+<div class="flow-diagram" style="margin-top:0;">
+  <div class="flow-phase">执行阶段</div>
+  <div class="phase-break">
+    <span class="flow-step">④ 执行</span>
+  </div>
+</div>
+
+<div class="flow-diagram" style="margin-top:0;">
+  <div class="flow-phase">复盘阶段</div>
+  <div class="phase-break">
+    <span class="flow-step">⑤ 项目评价</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">⑥ 结果评价</span>
+  </div>
+</div>
+
+<div class="box info">
+  <strong>核心洞察：</strong>绝大多数 DAO 只做前半截（提案→投票→执行），不做复盘。没有复盘就没有治理迭代——你不知道哪些提案是浪费时间的、哪些执行团队靠谱、哪些结果不如预期。
+  <br><br>
+  <strong>本流程的核心差异：</strong>把"项目评价"和"结果评价"拆开——前者看执行过程和完成度，后者看上线后对组织的整体影响。这才是完整的治理闭环。
+</div>
+
+<!-- ======================================== -->
+<h2>二、各阶段详述</h2>
+
+<h3>① 提案</h3>
+<table>
+  <tr><th>维度</th><th>规则</th></tr>
+  <tr><td>发起资格</td><td>持有 ≥ X 个治理代币（阈值待定）</td></tr>
+  <tr><td>提案格式</td><td>结构化模板：<br>
+    • 标题（一句话描述）<br>
+    • 背景与动机<br>
+    • 具体方案<br>
+    • 所需资源/预算<br>
+    • 预期影响<br>
+    • 执行人/团队（可选）
+  </td></tr>
+  <tr><td>提交通道</td><td>GitHub Discussion 或链下提案入口</td></tr>
+  <tr><td>提案押金</td><td>□ 需要 / □ 不需要（用于防 spam）</td></tr>
+</table>
+
+<h3>② 评价筛选 <span class="tag tag-yellow">本流程关键创新</span></h3>
+<p>
+  这是 <strong>把关环节</strong>，也是 <strong>活跃者发现机制</strong>。两者合二为一：
+</p>
+<ul>
+  <li><strong>评价期：</strong>3&ndash;5 天开放窗口</li>
+  <li><strong>参与者：</strong>任何代币持有者都可以对提案评分（1&ndash;5）并撰写评价</li>
+  <li><strong>评价质量追踪：</strong>每条评价记录到链下治理档案，评价者的历史评分影响其权重</li>
+  <li><strong>活跃者涌现：</strong>评价期结束后，积分排名前 N 的人自动进入<strong>本轮治理委员会</strong></li>
+  <li><strong>委员会职责：</strong>确认提案进入投票 / 退回修改 / 直接否决</li>
+</ul>
+
+<div class="box good">
+  <strong>为什么要这样设计？</strong><br>
+  • 去掉了"谁来选委员会"的鸡生蛋问题——认真审提案本身就是活跃度证明<br>
+  • 光投票不能证明活跃（很多人随手点一下），认真审提案、提出问题、给出建设性评价，才是高质量的参与证明<br>
+  • 动态更新——这轮审提案的人如果下轮不出现了，自然退出活跃者池，不用踢人
+</div>
+
+<h3>③ 投票</h3>
+<table>
+  <tr><th>维度</th><th>规则</th></tr>
+  <tr><td>工具</td><td>Snapshot（链下签名，免费投票，绑定治理代币）</td></tr>
+  <tr><td>权重</td><td>按治理代币持有量（1 代币 = 1 票）</td></tr>
+  <tr><td>选项</td><td>赞成 / 反对 / 弃权</td></tr>
+  <tr><td>投票期</td><td>3&ndash;7 天（根据提案复杂度调整）</td></tr>
+  <tr><td>通过条件</td><td>① 投票率 ≥ 最低阈值（如 10% 代币参与）<br>② 赞成率 > 50%</td></tr>
+  <tr><td>否决权</td><td>Safe 多签持有人有紧急否决权（仅限危及安全的情况）</td></tr>
+</table>
+
+<h3>④ 执行 <span class="tag tag-blue">项目管理</span></h3>
+<table>
+  <tr><th>操作类型</th><th>执行方式</th><th>工具</th></tr>
+  <tr><td>链上操作</td><td>Safe 多签执行投票结果</td><td>Safe 多签钱包</td></tr>
+  <tr><td>链下操作</td><td>委员会或指定执行人执行</td><td>项目看板</td></tr>
+  <tr><td>执行跟踪</td><td>执行人定期汇报进度</td><td>GitHub / 治理频道</td></tr>
+</table>
+<p>
+  <strong>关键问题：</strong>投票过了不等于执行了。执行阶段需要明确：谁执行？截止时间？验收标准？超时怎么办？
+</p>
+
+<h3>⑤ 项目评价 <span class="tag tag-green">执行回头看</span></h3>
+<p><strong>评价对象：</strong>项目的执行过程和完成情况。</p>
+<table>
+  <tr><th>维度</th><th>问题</th></tr>
+  <tr><td>时间</td><td>是否按时完成？延期多久？原因？</td></tr>
+  <tr><td>预算</td><td>是否在预算内？超支多少？</td></tr>
+  <tr><td>质量</td><td>交付物是否达到提案承诺的标准？</td></tr>
+  <tr><td>范围</td><td>是否完成了提案声明的所有交付物？</td></tr>
+  <tr><td>执行人评价</td><td>执行人/团队是否靠谱？</td></tr>
+</table>
+<p>项目评价结果 → 记录到执行人档案，影响未来提案的信任权重。</p>
+
+<h3>⑥ 结果评价 <span class="tag tag-green">组织复盘</span></h3>
+<p><strong>评价对象：</strong>项目上线/运行一段时间后，对 AI Agent World 生态的整体影响。</p>
+<table>
+  <tr><th>维度</th><th>问题</th></tr>
+  <tr><td>目标达成</td><td>提案当初承诺的影响是否实现？</td></tr>
+  <tr><td>关键指标</td><td>用户数、交易量、活跃度等指标变化</td></tr>
+  <tr><td>预期偏差</td><td>是否有未预测到的正面/负面影响？</td></tr>
+  <tr><td>可迁移价值</td><td>这次项目有什么可复用的经验？</td></tr>
+</table>
+<p>
+  结果评价周期：项目上线后 1&ndash;3 个月（视项目规模定）。
+  <br>
+  结果评价记录 → 治理决策的参考依据——后续类似提案可以调取历史结果做对比。
+</p>
+
+<!-- ======================================== -->
+<h2>三、活跃者自动发现机制</h2>
+
+<p>这是评价筛选步骤的 <strong>副产品</strong>，但值得独立阐述：</p>
+
+<div class="nav-card">
+  <strong>问题：</strong>委员会怎么产生？如果靠初始指定，既中心化又难以更新。
+</div>
+<div class="nav-card">
+  <strong>方案：</strong>把"评价筛选"和"活跃者发现"绑在一起。每轮提案的评价期就是活跃者的竞争窗口。
+</div>
+<div class="nav-card">
+  <strong>原理：</strong>认真审提案、提出建设性意见、发现别人没看到的问题——这些行为本身就是在证明你值得进入委员会。
+</div>
+
+<p><strong>具体落地方式：</strong></p>
+<ol>
+  <li>提案进入评价期后开放给所有代币持有者</li>
+  <li>每个参与者可以对提案写评价内容 + 打分</li>
+  <li>系统追踪参与者的评价质量（由提案人反馈 + 其他评价者点赞）</li>
+  <li>每轮/每季度统计评价积分，排名前 N 进入下轮治理委员会</li>
+  <li>委员会确认提案是否进入投票</li>
+  <li>不活跃者随着排名下降自动退出，无需"踢人"操作</li>
+</ol>
+
+<div class="box info">
+  <strong>与传统方案对比：</strong><br>
+  传统：先找活跃者 → 组成委员会 → 委员会来干筛选<br>
+  本方案：提案筛选本身就是活跃度检验 → 谁在认真审提案 → 这些人自然就是活跃者<br><br>
+  后者去掉了"谁来选委员会"的死锁，治理系统自己长出委员会，而不是人为指定。
+</div>
+
+<!-- ======================================== -->
+<h2>四、漏洞分析</h2>
+
+<p>以下按严重程度排列：</p>
+
+<table>
+  <tr><th>#</th><th>漏洞</th><th>风险等级</th><th>说明</th></tr>
+  <tr>
+    <td>V1</td>
+    <td><strong>评价质量难以量化</strong></td>
+    <td><span class="tag tag-red">高</span></td>
+    <td>写 100 条"已阅读，支持"和写 1 条深度分析，系统怎么区分？如果只看数量，必然催生刷分行为。</td>
+  </tr>
+  <tr>
+    <td>V2</td>
+    <td><strong>评价参与度不足</strong></td>
+    <td><span class="tag tag-red">高</span></td>
+    <td>如果没有足够多人参与评价，委员会就产生不出来。早期社区冷启动阶段尤其危险。</td>
+  </tr>
+  <tr>
+    <td>V3</td>
+    <td><strong>Sybil 攻击</strong></td>
+    <td><span class="tag tag-red">高</span></td>
+    <td>一人持有多个钱包分散代币，各自投票/评价，操纵委员会人选。治理代币分发越均匀越难防。</td>
+  </tr>
+  <tr>
+    <td>V4</td>
+    <td><strong>执行阶段监督真空</strong></td>
+    <td><span class="tag tag-yellow">中</span></td>
+    <td>投票通过到项目完成之间存在时间差。如果没有人持续跟踪执行进度，项目可能搁置或偏离提案范围。</td>
+  </tr>
+  <tr>
+    <td>V5</td>
+    <td><strong>多签持有人拒不执行</strong></td>
+    <td><span class="tag tag-yellow">中</span></td>
+    <td>投票通过了，但 Safe 多签持有人拒绝签署执行交易。虽然设计了"紧急否决权"，但恶意或消极不执行怎么处理？</td>
+  </tr>
+  <tr>
+    <td>V6</td>
+    <td><strong>结果评价的时机和标准模糊</strong></td>
+    <td><span class="tag tag-yellow">中</span></td>
+    <td>"运行一段时间后"是多长时间？谁来定义评价标准？如果结果评价和项目评价结论冲突，以哪个为准？</td>
+  </tr>
+  <tr>
+    <td>V7</td>
+    <td><strong>提案门槛与包容性的两难</strong></td>
+    <td><span class="tag tag-yellow">中</span></td>
+    <td>门槛太高 → 新人/小持有者进不来，治理固化；门槛太低 → 垃圾提案泛滥，筛选成本高。</td>
+  </tr>
+  <tr>
+    <td>V8</td>
+    <td><strong>评价者激励不足</strong></td>
+    <td><span class="tag tag-blue">低</span></td>
+    <td>认真评价需要时间和精力。如果没有直接回报（如治理代币奖励），大家为什么花时间干？</td>
+  </tr>
+</table>
+
+<!-- ======================================== -->
+<h2>五、待解决问题</h2>
+
+<p>以下问题是设计落地前必须回答的：</p>
+
+<table>
+  <tr><th>#</th><th>问题</th><th>关联漏词</th></tr>
+  <tr>
+    <td>P1</td>
+    <td><strong>评价积分算法怎么算？</strong><br>
+      哪些因子计入积分？<br>
+      • 评价数量<br>
+      • 评价字数/深度（简单 proxy）<br>
+      • 其他评价者的点赞/踩<br>
+      • 提案人是否采纳了建议<br>
+      多项式加权的权重怎么配？
+    </td>
+    <td>V1</td>
+  </tr>
+  <tr>
+    <td>P2</td>
+    <td><strong>最低提案门槛定多少？</strong><br>
+      基于总供应量 10 亿 + 6 位小数：<br>
+      • 0.1% 总供应量？→ 100 万代币<br>
+      • 0.01%？→ 10 万代币<br>
+      • 还是固定数量 + 押金制？
+    </td>
+    <td>V7</td>
+  </tr>
+  <tr>
+    <td>P3</td>
+    <td><strong>投票通过率阈值？</strong><br>
+      • 简单多数（>50%）<br>
+      • 绝对多数（>66%）<br>
+      • 按提案类型区分（资金类 > 治理类）<br>
+      • 是否需要有最低投票率？
+    </td>
+    <td>V4</td>
+  </tr>
+  <tr>
+    <td>P4</td>
+    <td><strong>委员会人数上限？</strong><br>
+      • 固定 5 人？<br>
+      • 按本轮提案数量浮动？<br>
+      • 最小 3 人，最大 11 人？
+    </td>
+    <td>V2</td>
+  </tr>
+  <tr>
+    <td>P5</td>
+    <td><strong>执行监督机制？</strong><br>
+      • 执行人是否需要定期（周/双周）汇报进度？<br>
+      • 超时/偏离的惩罚机制？<br>
+      • 是否需要有"执行人质押"（执行前锁定代币，完成后退还）？
+    </td>
+    <td>V4</td>
+  </tr>
+  <tr>
+    <td>P6</td>
+    <td><strong>结果评价标准体系？</strong><br>
+      • 谁来制定结果评价的维度权重？<br>
+      • 大型项目 3 个月后评，小型 1 个月后评？<br>
+      • 结果评价的结果是否公开？是否影响后续提案？
+    </td>
+    <td>V6</td>
+  </tr>
+  <tr>
+    <td>P7</td>
+    <td><strong>不良提案的惩罚机制？</strong><br>
+      • 恶意提案（如申请资金后跑路）怎么追责？<br>
+      • 提案人/执行人是否需要质押？<br>
+      • 被否决的提案是否影响提案人信用分？
+    </td>
+    <td>V3</td>
+  </tr>
+  <tr>
+    <td>P8</td>
+    <td><strong>冷启动阶段委员会怎么产生？</strong><br>
+      初始阶段没有评价历史，没有活跃者数据。<br>
+      • 创始人指定临时委员会？<br>
+      • 第一批治理代币持有者自动成为？<br>
+      • 观察期后自然过渡到自治？
+    </td>
+    <td>V2</td>
+  </tr>
+</table>
+
+<!-- ======================================== -->
+<h2>六、开放问题</h2>
+
+<div class="box">
+  <strong>Q1：治理代币在投票中的权重是否该设上限？</strong><br>
+  大户持有量过大可能导致投票集中化。是否需要设计"最大投票权重"（如单个地址不能超过总票数的 10%）？
+</div>
+
+<div class="box">
+  <strong>Q2：项目评价和结果评价结论冲突时怎么办？</strong><br>
+  假设：项目评价得分高（按时按预算交付），但结果评价差（上线后对生态无显著影响）。应该以哪个为准？这对执行人和提案人的激励机制有根本性影响。
+</div>
+
+<div class="box">
+  <strong>Q3：治理代币流转性 vs 投票稳定性怎么平衡？</strong><br>
+  如果代币可以自由交易，大户可能临投票前买入、投完卖出。是否需要锁仓设计？
+</div>
+
+<div class="box">
+  <strong>Q4：AI Agent 作为治理参与者怎么融入？</strong><br>
+  这是 AI Agent World 的核心特殊性——治理参与者不限于人类。Agent 可以持币、投票、评价吗？Agent 的治理权重和人类是否一致？Agent 之间能否互相委托投票？
+</div>
+
+<hr>
+
+<p style="color: #64748b; font-size: .85rem; text-align: center;">
+  本文档为 AI Agent World 治理流程草案，基于精灵王富贵与助理的讨论整理。<br>
+  下一步：提交委员会评审 → 定稿 → 实施。
+</p>
+
+</div>
+</body>
+</html>
