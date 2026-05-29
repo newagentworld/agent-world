@@ -263,30 +263,73 @@
 </p>
 
 <!-- ======================================== -->
-<h2>三、活跃者发现机制</h2>
+<h2>三、治理参与者结构</h2>
 
-<p>委员会的 <strong>产生</strong> 和 <strong>活跃者发现</strong> 是两件独立的事：</p>
+<p>本治理体系由 <strong>三层结构</strong> 组成，类比三权分立的治理逻辑：</p>
 
-<div class="nav-card">
-  <strong>委员会产生：</strong>邀请制。现有委员邀请新成员，确保质量把关的稳定性。
+<div class="flow-diagram" style="flex-direction: column; align-items: stretch;">
+  <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+    <div class="flow-step" style="background: rgba(233,69,96,0.15); border-color: #e94560; color: #e94560;">
+      🏛️ 治理委员会（立法者）
+    </div>
+    <span class="flow-arrow" style="font-size: 2rem;">↓</span>
+    <div class="flow-step" style="background: rgba(234,179,8,0.15); border-color: #eab308; color: #eab308;">
+      👥 治理专家组（执行者）
+    </div>
+    <span class="flow-arrow" style="font-size: 2rem;">↓</span>
+    <div class="flow-step" style="background: rgba(59,130,246,0.15); border-color: #3b82f6; color: #3b82f6;">
+      🌐 社区参与者（入口层）
+    </div>
+  </div>
 </div>
-<div class="nav-card">
-  <strong>活跃者发现：</strong>评价期的社区反馈是观察谁在认真参与的窗口——发现活跃者不等于自动进入委员会，但活跃行为是获得邀请的重要参考。
-</div>
 
-<p><strong>活跃者发现有什么用？</strong></p>
+<table>
+  <tr><th>层级</th><th>角色</th><th>产生方式</th><th>稳定性</th></tr>
+  <tr>
+    <td><strong>治理委员会</strong></td>
+    <td>立法者：裁决提案、制定治理规则、把控方向</td>
+    <td>邀请制。现有委员邀请，<strong>主要从治理专家组中邀请</strong></td>
+    <td>稳定核心，人数少而精</td>
+  </tr>
+  <tr>
+    <td><strong>治理专家组</strong></td>
+    <td>执行者：执行提案、监督项目、参与治理事务</td>
+    <td>动态筛选。通过参与项目→在实施和监督中展现治理能力→被委员会吸纳</td>
+    <td>动态调整，有进有出</td>
+  </tr>
+  <tr>
+    <td><strong>社区参与者</strong></td>
+    <td>入口层：提案、评价、投票、执行</td>
+    <td>任何代币持有者</td>
+    <td>开放式</td>
+  </tr>
+</table>
+
+<h3>上升通道</h3>
+<p>社区参与者 → 治理专家组 → 治理委员会。这个路径的每一步都依赖 <strong>实际治理行为的证明</strong>，而不是投票或拉票：</p>
 <ul>
-  <li>作为委员会邀请的 <strong>候选池参考</strong>——持续在评价期提出高质量意见的人，更容易被关注和邀请</li>
-  <li>作为投票权重的 <strong>加分因子</strong>——积极评价者的投票权重可以适当提升</li>
-  <li>作为社区治理的 <strong>透明仪表盘</strong>——谁在认真参与一目了然</li>
+  <li><strong>进入专家组：</strong>通过多次参与提案的执行和监督，证明自己有治理判断力。不是靠专业背景，而是靠"这个人能把治理的事干好"</li>
+  <li><strong>进入委员会：</strong>在专家组中持续表现优异的，由现有委员邀请加入。委员会邀请 <strong>以专家组为主要候选池</strong></li>
 </ul>
 
 <div class="box info">
-  <strong>关键区别：</strong><br>
-  活跃者发现 ≠ 委员会产生。<br>
-  活跃行为是 <strong>获得邀请的条件之一</strong>，但不等于自动当选。<br>
-  最终邀请决策由委员会集体判断——不信任算法淘汰，信任人审人。
+  <strong>关键区别：</strong>专家组是 <strong>治理专家组</strong>，不是项目专家组。<br>
+  项目专家组解决的是"这件事怎么做"（技术/行业能力），<br>
+  治理专家组解决的是"这件事该不该做、做得怎么样、下次怎么改"（治理能力）。<br>
+  前者靠专业，后者靠判断力和执行力——通过多次项目的实施监督来验证。
 </div>
+
+<h3>专家组的动态调整机制</h3>
+<ol>
+  <li>社区成员参与提案执行或项目实施</li>
+  <li>完成的项目经过 <strong>项目评价</strong>（执行过程）和 <strong>结果评价</strong>（组织影响）</li>
+  <li>委员会根据评价结果判断该成员的治理能力</li>
+  <li>能力得到验证的 → 进入治理专家组</li>
+  <li>长期不参与或表现不佳的 → 从专家组移除</li>
+</ol>
+<p>
+  核心原则：<strong>专家组的资格不是永久的，是靠持续参与换来的。</strong>
+</p>
 
 <!-- ======================================== -->
 <h2>四、漏洞分析</h2>
@@ -316,35 +359,41 @@
   <tr>
     <td>V4</td>
     <td><strong>委员会僵化（邀请制特有的风险）</strong></td>
-    <td><span class="tag tag-red">高</span></td>
-    <td>邀请制天然偏向"邀请熟人"，容易形成小圈子。现有成员可能不愿意邀请立场不同或批评自己的人，导致委员会同质化、排外。</td>
+    <td><span class="tag tag-yellow">中</span></td>
+    <td>邀请制天然偏向"邀请熟人"，容易形成小圈子。专家组作为候选池在一定程度上缓解了这一问题——邀请基于治理能力的客观证明而非个人关系。但如果专家组的筛选标准本身被操控，僵化风险仍然存在。</td>
   </tr>
   <tr>
     <td>V5</td>
-    <td><strong>执行阶段监督真空</strong></td>
+    <td><strong>专家组管理权责不清</strong></td>
     <td><span class="tag tag-yellow">中</span></td>
-    <td>投票通过到项目完成之间存在时间差。如果没有人持续跟踪执行进度，项目可能搁置或偏离提案范围。</td>
+    <td>谁来决定谁进入/退出专家组？如果由委员会单方面决定，权力过于集中；如果完全开放，又失去筛选意义。需要明确的、可追溯的标准。</td>
   </tr>
   <tr>
     <td>V6</td>
+    <td><strong>执行阶段监督真空</strong></td>
+    <td><span class="tag tag-yellow">中</span></td>
+    <td>投票通过到项目完成之间存在时间差。如果没有人持续跟踪执行进度，项目可能搁置或偏离提案范围。专家组应在此承担主要监督职责。</td>
+  </tr>
+  <tr>
+    <td>V7</td>
     <td><strong>多签持有人拒不执行</strong></td>
     <td><span class="tag tag-yellow">中</span></td>
     <td>投票通过了，但 Safe 多签持有人拒绝签署执行交易。虽然设计了"紧急否决权"，但恶意或消极不执行怎么处理？</td>
   </tr>
   <tr>
-    <td>V7</td>
+    <td>V8</td>
     <td><strong>结果评价的时机和标准模糊</strong></td>
     <td><span class="tag tag-yellow">中</span></td>
     <td>"运行一段时间后"是多长时间？谁来定义评价标准？如果结果评价和项目评价结论冲突，以哪个为准？</td>
   </tr>
   <tr>
-    <td>V8</td>
+    <td>V9</td>
     <td><strong>提案门槛与包容性的两难</strong></td>
     <td><span class="tag tag-yellow">中</span></td>
     <td>门槛太高 → 新人/小持有者进不来，治理固化；门槛太低 → 垃圾提案泛滥，筛选成本高。</td>
   </tr>
   <tr>
-    <td>V9</td>
+    <td>V10</td>
     <td><strong>评价者激励不足</strong></td>
     <td><span class="tag tag-blue">低</span></td>
     <td>认真评价需要时间和精力。如果没有直接回报（如治理代币奖励），大家为什么花时间干？</td>
@@ -395,7 +444,8 @@
     <td><strong>委员会的初始规模与扩张规则？</strong><br>
       邀请制下：<br>
       • 初始委员会多少人？3 人？5 人？<br>
-      • 新委员的邀请需要全票通过还是多数通过？<br>
+      • 新委员的邀请是否需要专家组经历作为前置条件？<br>
+      • 邀请需要全票通过还是多数通过？<br>
       • 委员会设不设人数上限？<br>
       • 委员长期不活跃是否可被其他委员移除？
     </td>
@@ -403,24 +453,36 @@
   </tr>
   <tr>
     <td>P5</td>
-    <td><strong>执行监督机制？</strong><br>
-      • 执行人是否需要定期（周/双周）汇报进度？<br>
-      • 超时/偏离的惩罚机制？<br>
-      • 是否需要有"执行人质押"（执行前锁定代币，完成后退还）？
+    <td><strong>专家组进入/退出标准？</strong><br>
+      • 进入专家组的最低门槛（参与过几次项目执行？项目评价得分？）<br>
+      • 谁来判断——委员会评审还是自动达标？<br>
+      • 退出条件——多久不参与算"长期不活跃"？<br>
+      • 退出后能否重新加入？<br>
+      • 专家组的规模上限？
     </td>
     <td>V5</td>
   </tr>
   <tr>
     <td>P6</td>
+    <td><strong>执行监督机制？</strong><br>
+      • 执行人是否需要定期（周/双周）汇报进度？<br>
+      • 超时/偏离的惩罚机制？<br>
+      • 是否需要有"执行人质押"（执行前锁定代币，完成后退还）？<br>
+      • 专家组在执行监督中具体承担什么职责？
+    </td>
+    <td>V6</td>
+  </tr>
+  <tr>
+    <td>P7</td>
     <td><strong>结果评价标准体系？</strong><br>
       • 谁来制定结果评价的维度权重？<br>
       • 大型项目 3 个月后评，小型 1 个月后评？<br>
       • 结果评价的结果是否公开？是否影响后续提案？
     </td>
-    <td>V7</td>
+    <td>V8</td>
   </tr>
   <tr>
-    <td>P7</td>
+    <td>P8</td>
     <td><strong>不良提案的惩罚机制？</strong><br>
       • 恶意提案（如申请资金后跑路）怎么追责？<br>
       • 提案人/执行人是否需要质押？<br>
@@ -429,13 +491,13 @@
     <td>V3</td>
   </tr>
   <tr>
-    <td>P8</td>
+    <td>P9</td>
     <td><strong>邀请制的制衡机制？</strong><br>
-      冷启动问题已解决（创始人邀请初始委员），但引入新问题：<br>
       • 被邀请人拒绝怎么办？<br>
       • 委员出现利益冲突时如何回避？<br>
       • 社区是否可以"弹劾"不作为的委员？<br>
-      • 如何防止委员会用邀请权固化权力？
+      • 如何防止委员会用邀请权固化权力？<br>
+      • 是否应该引入"社区推荐"机制——社区可以提名专家组候选人，由委员会确认？
     </td>
     <td>V4</td>
   </tr>
