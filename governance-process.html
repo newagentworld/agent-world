@@ -124,7 +124,7 @@
 
 <h1>AI Agent World 治理流程</h1>
 <div class="subhead">
-  版本 0.2 · 草案 · 委员会评审后定稿<br>
+  版本 0.4 · 草案 · 委员会评审后定稿<br>
   最后更新：2026-05-29
 </div>
 
@@ -139,32 +139,40 @@
   <div class="phase-break">
     <span class="flow-step">① 提案</span>
     <span class="flow-arrow">→</span>
-    <span class="flow-step">② 评价筛选</span>
+    <span class="flow-step">②a 初筛</span>
+    <span class="flow-step" style="font-size:.75rem; background:transparent; border-color:transparent; color:#64748b;">(全体持有人)</span>
     <span class="flow-arrow">→</span>
-    <span class="flow-step">③ 投票</span>
+    <span class="flow-step">②b 专家组投票</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">③ 执行</span>
   </div>
 </div>
 
 <div class="flow-diagram" style="margin-top:0;">
   <div class="flow-phase">执行阶段</div>
   <div class="phase-break">
-    <span class="flow-step">④ 执行</span>
+    <span class="flow-step">③ 执行</span>
   </div>
 </div>
 
 <div class="flow-diagram" style="margin-top:0;">
   <div class="flow-phase">复盘阶段</div>
   <div class="phase-break">
-    <span class="flow-step">⑤ 项目评价</span>
+    <span class="flow-step">④ 项目评价</span>
     <span class="flow-arrow">→</span>
-    <span class="flow-step">⑥ 结果评价</span>
+    <span class="flow-step">⑤ 结果评价</span>
   </div>
 </div>
 
 <div class="box info">
-  <strong>核心洞察：</strong>绝大多数 DAO 只做前半截（提案→投票→执行），不做复盘。没有复盘就没有治理迭代——你不知道哪些提案是浪费时间的、哪些执行团队靠谱、哪些结果不如预期。
+  <strong>核心洞察：</strong>绝大多数 DAO 只做前半截（提案→投票→执行），不做复盘。没有复盘就没有治理迭代。
   <br><br>
-  <strong>本流程的核心差异：</strong>把"项目评价"和"结果评价"拆开——前者看执行过程和完成度，后者看上线后对组织的整体影响。这才是完整的治理闭环。
+  <strong>本流程的核心差异：</strong>
+  <ol>
+    <li><strong>两段式筛选：</strong>②a 初筛（全体持有人）→ ②b 专家组投票（预备专家组），后者以前者的参与行为自动产生投票者</li>
+    <li><strong>复盘分离：</strong>项目评价（执行完成度）和结果评价（组织影响）拆开，形成完整闭环</li>
+    <li><strong>自管理：</strong>参与=资格，不活跃=退出，委员会只做人肉把关，不管理准入退出</li>
+  </ol>
 </div>
 
 <!-- ======================================== -->
@@ -186,45 +194,37 @@
   <tr><td>提案押金</td><td>□ 需要 / □ 不需要（用于防 spam）</td></tr>
 </table>
 
-<h3>② 评价筛选 <span class="tag tag-yellow">质量把关</span></h3>
+<h3>②a 初筛 <span class="tag tag-yellow">全体持有人把关</span></h3>
 <p>
-  这是 <strong>把关环节</strong>——在提案进入投票之前，由委员会进行质量审查：
+  这是 <strong>第一道过滤</strong>——所有代币持有人参与，同时完成三件事：
+  筛选提案、发现活跃者、形成预备专家组。
 </p>
-<ul>
-  <li><strong>评价机制：</strong>
-    <ul>
-      <li>提案提交后进入 <strong>评价期</strong>（3&ndash;5 天）</li>
-      <li>任何代币持有者可以查阅提案、评分（1&ndash;5）并撰写评价</li>
-      <li>评价记录到链下治理档案</li>
-    </ul>
-  </li>
-  <li><strong>委员会终审：</strong>评价期结束后，<strong>治理委员会</strong>综合社区反馈给出裁决：<br>
-    ✅ 进入投票 / 🔄 退回修改 / ❌ 直接否决
-  </li>
-</ul>
-
-<div class="box info">
-  <strong>委员会组成：邀请制。</strong><br>
-  委员会成员由现有委员邀请加入，不设公开竞选或自动晋级通道。
-  邀请标准基于：治理参与记录、专业能力、社区信誉。<br><br>
-  <strong>这样设计的原因：</strong><br>
-  • 委员会的核心职责是质量把关——需要的是判断力，不是人气<br>
-  • 邀请制保证了稳定性：成员有长期责任意识，不会因一轮评价的波动而进出<br>
-  • 委员会质量决定了整个治理系统的信任基础——邀请制是守门人的守门人
-</div>
-
-<h3>③ 投票</h3>
 <table>
   <tr><th>维度</th><th>规则</th></tr>
-  <tr><td>工具</td><td>Snapshot（链下签名，免费投票，绑定治理代币）</td></tr>
-  <tr><td>权重</td><td>按治理代币持有量（1 代币 = 1 票）</td></tr>
-  <tr><td>选项</td><td>赞成 / 反对 / 弃权</td></tr>
-  <tr><td>投票期</td><td>3&ndash;7 天（根据提案复杂度调整）</td></tr>
-  <tr><td>通过条件</td><td>① 投票率 ≥ 最低阈值（如 10% 代币参与）<br>② 赞成率 > 50%</td></tr>
-  <tr><td>否决权</td><td>Safe 多签持有人有紧急否决权（仅限危及安全的情况）</td></tr>
+  <tr><td>参与对象</td><td>所有代币持有人</td></tr>
+  <tr><td>筛选方式</td><td>每个持有人对每份提案给出"通过/不通过"的简单选择</td></tr>
+  <tr><td>筛选标准</td><td>由持有人自行判断——提案是否有价值、是否合理</td></tr>
+  <tr><td>通过条件</td><td>得票率（通过/总票数）达到阈值（如 > 30%）的提案进入下一轮</td></tr>
+  <tr><td>参与机制</td><td>参与初筛 = 自动成为本轮 <strong>预备专家组成员</strong></td></tr>
+  <tr><td>预备专家组构成</td><td>所有参与初筛的活跃者（含既有专家组成员）</td></tr>
 </table>
 
-<h3>④ 执行 <span class="tag tag-blue">项目管理</span></h3>
+<h3>②b 专家组投票 <span class="tag tag-yellow">专家决策</span></h3>
+<p>
+  这是 <strong>第二道过滤</strong>——由 <strong>预备专家组</strong> 对通过初筛的提案进行投票，决定哪些进入执行阶段。
+</p>
+<table>
+  <tr><th>维度</th><th>规则</th></tr>
+  <tr><td>投票对象</td><td>预备专家组全体成员（所有参与初筛的活跃者）</td></tr>
+  <tr><td>投票方式</td><td><strong>随机分配</strong>——每个提案随机分配给池中 N 名专家投票（如 100 人/提案）</td></tr>
+  <tr><td>每人负担</td><td>每轮每人投票 1&ndash;3 份提案（视池子规模定），不累人</td></tr>
+  <tr><td>投票内容</td><td>赞成 / 反对 / 弃权</td></tr>
+  <tr><td>通过条件</td><td>赞成率 > 50%（或按提案类型区分阈值）</td></tr>
+  <tr><td>投票期</td><td>3&ndash;7 天</td></tr>
+  <tr><td>否决权</td><td>治理委员会可在极端情况下行使紧急否决权（不用于日常决策）</td></tr>
+</table>
+
+<h3>③ 执行 <span class="tag tag-blue">项目管理</span></h3>
 <table>
   <tr><th>操作类型</th><th>执行方式</th><th>工具</th></tr>
   <tr><td>链上操作</td><td>Safe 多签执行投票结果</td><td>Safe 多签钱包</td></tr>
@@ -235,7 +235,7 @@
   <strong>关键问题：</strong>投票过了不等于执行了。执行阶段需要明确：谁执行？截止时间？验收标准？超时怎么办？
 </p>
 
-<h3>⑤ 项目评价 <span class="tag tag-green">执行回头看</span></h3>
+<h3>④ 项目评价 <span class="tag tag-green">执行回头看</span></h3>
 <p><strong>评价对象：</strong>项目的执行过程和完成情况。</p>
 <table>
   <tr><th>维度</th><th>问题</th></tr>
@@ -247,7 +247,7 @@
 </table>
 <p>项目评价结果 → 记录到执行人档案，影响未来提案的信任权重。</p>
 
-<h3>⑥ 结果评价 <span class="tag tag-green">组织复盘</span></h3>
+<h3>⑤ 结果评价 <span class="tag tag-green">组织复盘</span></h3>
 <p><strong>评价对象：</strong>项目上线/运行一段时间后，对 AI Agent World 生态的整体影响。</p>
 <table>
   <tr><th>维度</th><th>问题</th></tr>
@@ -265,7 +265,7 @@
 <!-- ======================================== -->
 <h2>三、治理参与者结构</h2>
 
-<p>本治理体系由 <strong>三层结构</strong> 组成，类比三权分立的治理逻辑：</p>
+<p>本治理体系由 <strong>四层结构</strong> 组成，从入口到核心层层递进：</p>
 
 <div class="flow-diagram" style="flex-direction: column; align-items: stretch;">
   <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
@@ -274,10 +274,14 @@
     </div>
     <span class="flow-arrow" style="font-size: 2rem;">↓</span>
     <div class="flow-step" style="background: rgba(234,179,8,0.15); border-color: #eab308; color: #eab308;">
-      👥 治理专家组（执行者）
+      👥 治理专家组（稳定执行者）
     </div>
     <span class="flow-arrow" style="font-size: 2rem;">↓</span>
-    <div class="flow-step" style="background: rgba(59,130,246,0.15); border-color: #3b82f6; color: #3b82f6;">
+    <div class="flow-step" style="background: rgba(59,130,246,0.12); border-color: #3b82f6; color: #3b82f6; border-style: dashed;">
+      🔄 预备专家组（每轮动态形成）
+    </div>
+    <span class="flow-arrow" style="font-size: 2rem;">↓</span>
+    <div class="flow-step" style="background: rgba(139,92,246,0.12); border-color: #8b5cf6; color: #8b5cf6;">
       🌐 社区参与者（入口层）
     </div>
   </div>
@@ -287,49 +291,63 @@
   <tr><th>层级</th><th>角色</th><th>产生方式</th><th>稳定性</th></tr>
   <tr>
     <td><strong>治理委员会</strong></td>
-    <td>立法者：裁决提案、制定治理规则、把控方向</td>
+    <td>立法者：制定治理规则、把控方向、紧急否决权</td>
     <td>邀请制。现有委员邀请，<strong>主要从治理专家组中邀请</strong></td>
     <td>稳定核心，人数少而精</td>
   </tr>
   <tr>
     <td><strong>治理专家组</strong></td>
-    <td>执行者：执行提案、监督项目、参与治理事务</td>
-    <td>动态筛选。通过参与项目→在实施和监督中展现治理能力→被委员会吸纳</td>
-    <td>动态调整，有进有出</td>
+    <td>执行者：持续参与治理、监督项目、承担重要角色</td>
+    <td>从预备专家组中筛选：多次在初筛和投票中保持活跃→被委员会确认</td>
+    <td>稳定池，有进有出（不活跃自动退出）</td>
+  </tr>
+  <tr>
+    <td><strong>预备专家组</strong></td>
+    <td>投票者：对通过初筛的提案进行专家投票</td>
+    <td><strong>每轮动态形成</strong>——参与初筛的全体活跃者自动成为预备专家</td>
+    <td>每轮动态调整，有参与就在，没参与就出</td>
   </tr>
   <tr>
     <td><strong>社区参与者</strong></td>
-    <td>入口层：提案、评价、投票、执行</td>
+    <td>入口层：提案、初筛、执行</td>
     <td>任何代币持有者</td>
     <td>开放式</td>
   </tr>
 </table>
 
-<h3>上升通道</h3>
-<p>社区参与者 → 治理专家组 → 治理委员会。这个路径的每一步都依赖 <strong>实际治理行为的证明</strong>，而不是投票或拉票：</p>
+<h3>层间流动（上升通道）</h3>
+<p>社区参与者 → 预备专家组 → 治理专家组 → 治理委员会。</p>
 <ul>
-  <li><strong>进入专家组：</strong>通过多次参与提案的执行和监督，证明自己有治理判断力。不是靠专业背景，而是靠"这个人能把治理的事干好"</li>
-  <li><strong>进入委员会：</strong>在专家组中持续表现优异的，由现有委员邀请加入。委员会邀请 <strong>以专家组为主要候选池</strong></li>
+  <li><strong>进入预备专家组：</strong>参与初筛自动进入，无需审批</li>
+  <li><strong>进入治理专家组：</strong>在预备专家组中持续活跃（多次投票），由委员会确认转为正式专家</li>
+  <li><strong>进入委员会：</strong>在专家组中持续表现优异，由现有委员邀请</li>
 </ul>
 
-<div class="box info">
-  <strong>关键区别：</strong>专家组是 <strong>治理专家组</strong>，不是项目专家组。<br>
-  项目专家组解决的是"这件事怎么做"（技术/行业能力），<br>
-  治理专家组解决的是"这件事该不该做、做得怎么样、下次怎么改"（治理能力）。<br>
-  前者靠专业，后者靠判断力和执行力——通过多次项目的实施监督来验证。
-</div>
+<h3>专家组的动态调整</h3>
+<p>专家组资格不是永久的，调整机制如下：</p>
+<table>
+  <tr><th>层级</th><th>激活条件</th><th>不活跃阈值</th><th>后果</th></tr>
+  <tr>
+    <td>预备专家组</td>
+    <td>参与本轮初筛</td>
+    <td>未参与本轮初筛</td>
+    <td>不再列入本轮预备专家名单</td>
+  </tr>
+  <tr>
+    <td>治理专家组</td>
+    <td>在预备专家组中完成分配的投票任务</td>
+    <td>连续 N 轮未投票（如 3 轮）</td>
+    <td>失去正式专家资格，退回社区层</td>
+  </tr>
+</table>
+<p>核心原则：<strong>所有资格靠持续参与维持。不活跃＝自动退出，无需弹劾。</strong></p>
 
-<h3>专家组的动态调整机制</h3>
-<ol>
-  <li>社区成员参与提案执行或项目实施</li>
-  <li>完成的项目经过 <strong>项目评价</strong>（执行过程）和 <strong>结果评价</strong>（组织影响）</li>
-  <li>委员会根据评价结果判断该成员的治理能力</li>
-  <li>能力得到验证的 → 进入治理专家组</li>
-  <li>长期不参与或表现不佳的 → 从专家组移除</li>
-</ol>
-<p>
-  核心原则：<strong>专家组的资格不是永久的，是靠持续参与换来的。</strong>
-</p>
+<div class="box info">
+  <strong>关键区别：</strong><br>
+  预备专家组 ≠ 治理专家组。<br>
+  预备专家组是每轮根据参与行为 <strong>临时产生</strong> 的投票池，<br>
+  治理专家组是 <strong>持续活跃的稳定层</strong>，是委员会的候选池。
+</div>
 
 <!-- ======================================== -->
 <h2>四、漏洞分析</h2>
@@ -364,9 +382,9 @@
   </tr>
   <tr>
     <td>V5</td>
-    <td><strong>专家组管理权责不清</strong></td>
-    <td><span class="tag tag-yellow">中</span></td>
-    <td>谁来决定谁进入/退出专家组？如果由委员会单方面决定，权力过于集中；如果完全开放，又失去筛选意义。需要明确的、可追溯的标准。</td>
+    <td><strong>正式专家组的确认标准不明确</strong></td>
+    <td><span class="tag tag-blue">低</span></td>
+    <td>预备专家组是自动形成的，但"从预备升级为正式专家"的标准需要明确——连续参与几次？投票准确率？还是由委员会评审？此问题不紧急，随系统运行自然浮现。</td>
   </tr>
   <tr>
     <td>V6</td>
@@ -453,12 +471,12 @@
   </tr>
   <tr>
     <td>P5</td>
-    <td><strong>专家组进入/退出标准？</strong><br>
-      • 进入专家组的最低门槛（参与过几次项目执行？项目评价得分？）<br>
-      • 谁来判断——委员会评审还是自动达标？<br>
-      • 退出条件——多久不参与算"长期不活跃"？<br>
-      • 退出后能否重新加入？<br>
-      • 专家组的规模上限？
+    <td><strong>正式专家组的升级标准？</strong><br>
+      预备→正式专家的转换条件：<br>
+      • 连续参与 N 轮初筛？<br>
+      • 每轮投票完成率 ≥ 80%？<br>
+      • 需要委员会评审还是自动达标？<br>
+      • 正式专家组的上限？
     </td>
     <td>V5</td>
   </tr>
