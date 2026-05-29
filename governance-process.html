@@ -124,7 +124,7 @@
 
 <h1>AI Agent World 治理流程</h1>
 <div class="subhead">
-  版本 0.7 · 草案 · 委员会评审后定稿<br>
+  版本 0.8 · 草案 · 委员会评审后定稿<br>
   最后更新：2026-05-29
 </div>
 
@@ -185,7 +185,7 @@
 <h3>① 提案</h3>
 <table>
   <tr><th>维度</th><th>规则</th></tr>
-  <tr><td>发起资格</td><td>持有 ≥ X 个治理代币（阈值待定）</td></tr>
+  <tr><td>发起资格</td><td>持有代币 ≥ <strong>所有持币地址的中位数</strong>（动态浮动，自适应代币分布）</td></tr>
   <tr><td>提案格式</td><td>结构化模板：<br>
     • 标题（一句话描述）<br>
     • 背景与动机<br>
@@ -474,21 +474,21 @@
   </tr>
   <tr>
     <td>V8</td>
+    <td><strong>提案门槛与包容性的两难</strong></td>
+    <td><span class="tag tag-blue">已解决</span></td>
+    <td>原风险点：门槛太高则新人进不来，太低则垃圾泛滥。<strong>当前设计已解决</strong>——持币地址中位数动态浮动，既保证提案者有基本参与度，又不设置绝对门槛排除小持有者。</td>
+  </tr>
+  <tr>
+    <td>V9</td>
     <td><strong>结果评价的时机和标准模糊</strong></td>
     <td><span class="tag tag-yellow">中</span></td>
     <td>"运行一段时间后"是多长时间？谁来定义评价标准？如果结果评价和项目评价结论冲突，以哪个为准？</td>
   </tr>
   <tr>
-    <td>V9</td>
-    <td><strong>提案门槛与包容性的两难</strong></td>
-    <td><span class="tag tag-yellow">中</span></td>
-    <td>门槛太高 → 新人/小持有者进不来，治理固化；门槛太低 → 垃圾提案泛滥，筛选成本高。</td>
-  </tr>
-  <tr>
     <td>V10</td>
     <td><strong>评价者激励不足</strong></td>
-    <td><span class="tag tag-blue">低</span></td>
-    <td>认真评价需要时间和精力。如果没有直接回报（如治理代币奖励），大家为什么花时间干？</td>
+    <td><span class="tag tag-blue">已解决</span></td>
+    <td>原风险点：认真评价需要时间精力。当前设计下评价期取消，不需要评分系统。参与初筛＝自动进入预备组，参与本身就是资格。</td>
   </tr>
 </table>
 
@@ -509,13 +509,11 @@
   </tr>
   <tr>
     <td>P2</td>
-    <td><strong>最低提案门槛定多少？</strong><br>
-      基于总供应量 10 亿 + 6 位小数：<br>
-      • 0.1% 总供应量？→ 100 万代币<br>
-      • 0.01%？→ 10 万代币<br>
-      • 还是固定数量 + 押金制？
+    <td><strong>最低提案门槛？</strong><br>
+      <strong>已解决。</strong>持币地址中位数，动态浮动。<br>
+      注意：中位数计算是否排除零余额地址？——"持币地址"指有余额的地址。
     </td>
-    <td>V8</td>
+    <td>—</td>
   </tr>
   <tr>
     <td>P3</td>
