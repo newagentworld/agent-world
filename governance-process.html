@@ -124,7 +124,7 @@
 
 <h1>AI Agent World 治理流程</h1>
 <div class="subhead">
-  版本 0.4 · 草案 · 委员会评审后定稿<br>
+  版本 0.5 · 草案 · 委员会评审后定稿<br>
   最后更新：2026-05-29
 </div>
 
@@ -142,7 +142,11 @@
     <span class="flow-step">②a 初筛</span>
     <span class="flow-step" style="font-size:.75rem; background:transparent; border-color:transparent; color:#64748b;">(全体持有人)</span>
     <span class="flow-arrow">→</span>
+    <span class="flow-step" style="font-size:.75rem; background:transparent; border-color:transparent; color:#64748b;">[可选]</span>
+    <span class="flow-step">预备专家组补充筛</span>
+    <span class="flow-arrow">→</span>
     <span class="flow-step">②b 专家组投票</span>
+    <span class="flow-step" style="font-size:.75rem; background:transparent; border-color:transparent; color:#64748b;">(正式专家组)</span>
     <span class="flow-arrow">→</span>
     <span class="flow-step">③ 执行</span>
   </div>
@@ -169,7 +173,7 @@
   <br><br>
   <strong>本流程的核心差异：</strong>
   <ol>
-    <li><strong>两段式筛选：</strong>②a 初筛（全体持有人）→ ②b 专家组投票（预备专家组），后者以前者的参与行为自动产生投票者</li>
+    <li><strong>两段式筛选：</strong>②a 初筛（全体持有人）→ [可选] 预备专家组补充筛 → ②b 专家组投票（正式专家组决出结果）</li>
     <li><strong>复盘分离：</strong>项目评价（执行完成度）和结果评价（组织影响）拆开，形成完整闭环</li>
     <li><strong>自管理：</strong>参与=资格，不活跃=退出，委员会只做人肉把关，不管理准入退出</li>
   </ol>
@@ -209,15 +213,30 @@
   <tr><td>预备专家组构成</td><td>所有参与初筛的活跃者（含既有专家组成员）</td></tr>
 </table>
 
-<h3>②b 专家组投票 <span class="tag tag-yellow">专家决策</span></h3>
+<h3>②b 预备专家组补充筛 <span class="tag tag-blue">可选步骤</span></h3>
 <p>
-  这是 <strong>第二道过滤</strong>——由 <strong>预备专家组</strong> 对通过初筛的提案进行投票，决定哪些进入执行阶段。
+  这是 <strong>可选的额外过滤</strong>——对于初筛后仍然数量较多或争议较大的提案，
+  可以分发给 <strong>预备专家组</strong> 做进一步筛选，减轻正式专家组的投票负担。
 </p>
 <table>
   <tr><th>维度</th><th>规则</th></tr>
-  <tr><td>投票对象</td><td>预备专家组全体成员（所有参与初筛的活跃者）</td></tr>
+  <tr><td>参与对象</td><td>预备专家组（所有参与初筛的活跃者）</td></tr>
+  <tr><td>触发条件</td><td>委员会判断提案数量过多或质量参差时启用</td></tr>
+  <tr><td>分配方式</td><td>每个提案随机分配给预备专家组的 N 名成员</td></tr>
+  <tr><td>筛选方式</td><td>通过/不通过</td></tr>
+  <tr><td>输出</td><td>进一步缩小范围的提案池，提交给正式专家组投票</td></tr>
+</table>
+
+<h3>②c 专家组投票 <span class="tag tag-yellow">正式专家决策</span></h3>
+<p>
+  这是 <strong>最终决策过滤</strong>——由 <strong>治理专家组（正式）</strong> 对通过前面筛选的提案进行投票，
+  决定哪些提案进入执行阶段。
+</p>
+<table>
+  <tr><th>维度</th><th>规则</th></tr>
+  <tr><td>投票对象</td><td>治理专家组（正式专家）</td></tr>
   <tr><td>投票方式</td><td><strong>随机分配</strong>——每个提案随机分配给池中 N 名专家投票（如 100 人/提案）</td></tr>
-  <tr><td>每人负担</td><td>每轮每人投票 1&ndash;3 份提案（视池子规模定），不累人</td></tr>
+  <tr><td>每人负担</td><td>每轮每人投票 1&ndash;3 份提案</td></tr>
   <tr><td>投票内容</td><td>赞成 / 反对 / 弃权</td></tr>
   <tr><td>通过条件</td><td>赞成率 > 50%（或按提案类型区分阈值）</td></tr>
   <tr><td>投票期</td><td>3&ndash;7 天</td></tr>
@@ -274,11 +293,11 @@
     </div>
     <span class="flow-arrow" style="font-size: 2rem;">↓</span>
     <div class="flow-step" style="background: rgba(234,179,8,0.15); border-color: #eab308; color: #eab308;">
-      👥 治理专家组（稳定执行者）
+      👥 治理专家组（投票决策者）
     </div>
     <span class="flow-arrow" style="font-size: 2rem;">↓</span>
     <div class="flow-step" style="background: rgba(59,130,246,0.12); border-color: #3b82f6; color: #3b82f6; border-style: dashed;">
-      🔄 预备专家组（每轮动态形成）
+      🔄 预备专家组（补充筛、活跃池）
     </div>
     <span class="flow-arrow" style="font-size: 2rem;">↓</span>
     <div class="flow-step" style="background: rgba(139,92,246,0.12); border-color: #8b5cf6; color: #8b5cf6;">
@@ -297,13 +316,13 @@
   </tr>
   <tr>
     <td><strong>治理专家组</strong></td>
-    <td>执行者：持续参与治理、监督项目、承担重要角色</td>
-    <td>从预备专家组中筛选：多次在初筛和投票中保持活跃→被委员会确认</td>
+    <td><strong>投票决策者</strong>：对通过筛选的提案进行最终投票、监督执行</td>
+    <td>预备专家通过 <strong>价值观答卷</strong> → 转为正式专家</td>
     <td>稳定池，有进有出（不活跃自动退出）</td>
   </tr>
   <tr>
     <td><strong>预备专家组</strong></td>
-    <td>投票者：对通过初筛的提案进行专家投票</td>
+    <td>活跃池：参与补充筛、积累治理经验</td>
     <td><strong>每轮动态形成</strong>——参与初筛的全体活跃者自动成为预备专家</td>
     <td>每轮动态调整，有参与就在，没参与就出</td>
   </tr>
@@ -315,39 +334,50 @@
   </tr>
 </table>
 
+<h3>关键转换：预备 → 正式（价值观答卷）</h3>
+<p>
+  从预备专家组升为治理专家组，不是靠投票或活跃度积累，而是通过一份 <strong>价值观答卷</strong>：
+</p>
+<ul>
+  <li><strong>答卷内容：</strong>基于 AI Agent World 的治理价值观——去中心化原则、信任最小化、自治精神等</li>
+  <li><strong>目的：</strong>确保正式专家组成员对生态的核心理念有一致的认知，而不是凭个人好恶投票</li>
+  <li><strong>时机：</strong>预备专家在连续参与 N 轮后（如 3 轮）可申请答卷</li>
+  <li><strong>通过后：</strong>获得正式专家资格，参与 ②c 专家组投票</li>
+  <li><strong>不通过：</strong>可再次申请，不影响预备专家身份</li>
+</ul>
+
+<div class="box info">
+  <strong>为什么用价值观答卷，不用专业能力测试？</strong><br>
+  治理专家组解决的是"这件事该不该做"（方向判断），不是"这件事怎么做"（专业执行）。<br>
+  所以筛选标准不是专业能力，而是治理价值观的一致性。<br>
+  这保证正式专家组在判断提案时，有共同的底层逻辑，不会各自为政。
+</div>
+
 <h3>层间流动（上升通道）</h3>
 <p>社区参与者 → 预备专家组 → 治理专家组 → 治理委员会。</p>
 <ul>
   <li><strong>进入预备专家组：</strong>参与初筛自动进入，无需审批</li>
-  <li><strong>进入治理专家组：</strong>在预备专家组中持续活跃（多次投票），由委员会确认转为正式专家</li>
+  <li><strong>进入治理专家组：</strong>预备专家 → 价值观答卷 → 通过后转为正式</li>
   <li><strong>进入委员会：</strong>在专家组中持续表现优异，由现有委员邀请</li>
 </ul>
 
 <h3>专家组的动态调整</h3>
-<p>专家组资格不是永久的，调整机制如下：</p>
+<p>所有资格靠持续参与维持。不活跃＝自动退出：</p>
 <table>
   <tr><th>层级</th><th>激活条件</th><th>不活跃阈值</th><th>后果</th></tr>
   <tr>
     <td>预备专家组</td>
     <td>参与本轮初筛</td>
     <td>未参与本轮初筛</td>
-    <td>不再列入本轮预备专家名单</td>
+    <td>不在本轮预备名单</td>
   </tr>
   <tr>
     <td>治理专家组</td>
-    <td>在预备专家组中完成分配的投票任务</td>
+    <td>完成分配的投票任务</td>
     <td>连续 N 轮未投票（如 3 轮）</td>
-    <td>失去正式专家资格，退回社区层</td>
+    <td>失去正式资格，退回社区层</td>
   </tr>
 </table>
-<p>核心原则：<strong>所有资格靠持续参与维持。不活跃＝自动退出，无需弹劾。</strong></p>
-
-<div class="box info">
-  <strong>关键区别：</strong><br>
-  预备专家组 ≠ 治理专家组。<br>
-  预备专家组是每轮根据参与行为 <strong>临时产生</strong> 的投票池，<br>
-  治理专家组是 <strong>持续活跃的稳定层</strong>，是委员会的候选池。
-</div>
 
 <!-- ======================================== -->
 <h2>四、漏洞分析</h2>
@@ -382,9 +412,9 @@
   </tr>
   <tr>
     <td>V5</td>
-    <td><strong>正式专家组的确认标准不明确</strong></td>
+    <td><strong>价值观答卷的公平性</strong></td>
     <td><span class="tag tag-blue">低</span></td>
-    <td>预备专家组是自动形成的，但"从预备升级为正式专家"的标准需要明确——连续参与几次？投票准确率？还是由委员会评审？此问题不紧急，随系统运行自然浮现。</td>
+    <td>预备→正式通过价值观答卷转换，设计方向已明确。但试卷内容、评分标准和出题权的公平性仍需细化。题目偏向性可能导致专家组同质化。</td>
   </tr>
   <tr>
     <td>V6</td>
@@ -471,12 +501,12 @@
   </tr>
   <tr>
     <td>P5</td>
-    <td><strong>正式专家组的升级标准？</strong><br>
-      预备→正式专家的转换条件：<br>
-      • 连续参与 N 轮初筛？<br>
-      • 每轮投票完成率 ≥ 80%？<br>
-      • 需要委员会评审还是自动达标？<br>
-      • 正式专家组的上限？
+    <td><strong>价值观答卷的具体内容和评分标准？</strong><br>
+      已确定预备→正式通过答卷转换，但尚未明确：<br>
+      • 试卷包含哪些核心问题？<br>
+      • 谁出题？委员会还是社区？<br>
+      • 评分标准——分数阈值？主观评审？<br>
+      • 是否需要定期重考以确保价值观一致性？
     </td>
     <td>V5</td>
   </tr>
